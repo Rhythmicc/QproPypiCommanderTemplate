@@ -5,3 +5,9 @@
 ```shell
 pip3 install QproPypiCommanderTemplate
 ```
+
+## Usage
+
+```shell
+QproPypiCommanderTemplate --help
+```
