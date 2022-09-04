@@ -22,7 +22,11 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     zip_safe=True,
-    install_requires=[],
-    entry_points={},
+    install_requires=['Qpro'],
+    entry_points={
+        'console_scripts': [
+            'QproPypiCommanderTemplate = QproPypiCommanderTemplate.main:main',
+        ]
+    },
 )
 
