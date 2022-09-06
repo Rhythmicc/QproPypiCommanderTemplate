@@ -3,7 +3,7 @@
 ## Install
 
 ```shell
-pip3 install QproPypiCommanderTemplate
+pip3 install QproPypiCommanderTemplate -U
 ```
 
 ## Usage
@@ -11,3 +11,7 @@ pip3 install QproPypiCommanderTemplate
 ```shell
 QproPypiCommanderTemplate --help
 ```
+
+## Developer
+
+If you need use global config, just edit `__config__.py`, and make `enable_config = True`.

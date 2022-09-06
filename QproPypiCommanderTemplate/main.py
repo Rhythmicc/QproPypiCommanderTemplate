@@ -1,5 +1,9 @@
 from QuickProject.Commander import Commander
+from .__config__ import enable_config, QproPypiCommanderTemplateConfig
 
+config: QproPypiCommanderTemplateConfig = None
+if enable_config:
+    config = QproPypiCommanderTemplateConfig()
 
 app = Commander()
 
