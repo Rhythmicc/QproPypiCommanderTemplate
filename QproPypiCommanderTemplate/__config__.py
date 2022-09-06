@@ -1,7 +1,6 @@
-from cgitb import enable
 import os
 import json
-from QuickProject import user_root, QproDefaultConsole, QproInfoString, _ask
+from QuickProject import user_root, user_lang, QproDefaultConsole, QproInfoString, _ask
 
 enable_config = False
 config_path = os.path.join(user_root, "QproPypiCommanderTemplate.json")
@@ -15,9 +14,9 @@ questions = {
 }
 
 def init_config():
-    if not os.path.exists(config_path):
-        with open(config_path, "w") as f:
-            json.dump({i: _ask(questions[i]) for i in questions}, f, indent=4, ensure_ascii=False)
+    with open(config_path, "w") as f:
+        json.dump({i: _ask(questions[i]) for i in questions}, f, indent=4, ensure_ascii=False)
+    QproDefaultConsole.print(QproInfoString, f'Config file has been created at: "{config_path}"' if user_lang != 'zh' else f'配置文件已创建于: "{config_path}"')
 
 
 class QproPypiCommanderTemplateConfig:

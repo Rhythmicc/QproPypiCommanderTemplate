@@ -2,8 +2,14 @@
 
 name = 'QproPypiCommanderTemplate'
 
+from .__config__ import *
+
+config: QproPypiCommanderTemplateConfig = None
+if enable_config:
+    config = QproPypiCommanderTemplateConfig()
+
 import sys
-from QuickProject import _ask, QproDefaultConsole, QproInfoString, QproErrorString, user_lang, user_pip
+from QuickProject import user_pip, QproErrorString, _ask
 
 
 def external_exec(cmd: str, without_output: bool = False):
@@ -53,7 +59,7 @@ def requirePackage(pname: str,
                 'name': 'install',
                 'message':
                 f"""QproPypiCommanderTemplate require {pname + (' -> ' + module if module else '')}, confirm to install?
-  Qs 依赖 {pname + (' -> ' + module if module else '')}, 是否确认安装?""",
+  QproPypiCommanderTemplate 依赖 {pname + (' -> ' + module if module else '')}, 是否确认安装?""",
                 'default': True
         }):
             with QproDefaultConsole.status(
