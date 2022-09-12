@@ -3,12 +3,11 @@ import json
 from QuickProject import user_root, user_lang, QproDefaultConsole, QproInfoString, _ask
 
 enable_config = False
-config_path = os.path.join(user_root, "QproPypiCommanderTemplate.json")
+config_path = os.path.join(user_root, ".QproPypiCommanderTemplate_config")
 
 questions = {
     'name': {
         'type': 'input',
-        'name': 'name',
         'message': 'What is your name?',
     },
 }

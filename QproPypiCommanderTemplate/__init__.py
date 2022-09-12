@@ -9,7 +9,7 @@ if enable_config:
     config = QproPypiCommanderTemplateConfig()
 
 import sys
-from QuickProject import user_pip, QproErrorString, _ask
+from QuickProject import user_pip, _ask
 
 
 def external_exec(cmd: str, without_output: bool = False):
@@ -26,9 +26,9 @@ def external_exec(cmd: str, without_output: bool = False):
     stdout, stderr = p.communicate()
     content = stdout.strip() + stderr.strip()
     if ret_code and content and not without_output:
-        QproDefaultConsole.print(QproErrorString, content)
+        QproDefaultConsole.print(content)
     elif content and not without_output:
-        QproDefaultConsole.print(QproErrorString, content)
+        QproDefaultConsole.print(content)
     return ret_code, content
 
 
@@ -58,8 +58,8 @@ def requirePackage(pname: str,
                 'type': 'confirm',
                 'name': 'install',
                 'message':
-                f"""QproPypiCommanderTemplate require {pname + (' -> ' + module if module else '')}, confirm to install?
-  QproPypiCommanderTemplate 依赖 {pname + (' -> ' + module if module else '')}, 是否确认安装?""",
+                f"""{name} require {pname + (' -> ' + module if module else '')}, confirm to install?
+  {name} 依赖 {pname + (' -> ' + module if module else '')}, 是否确认安装?""",
                 'default': True
         }):
             with QproDefaultConsole.status(
@@ -72,7 +72,7 @@ def requirePackage(pname: str,
                      if module else f"import {pname}")
             else:
                 QproDefaultConsole.print(
-                    QproInfoString, f'just run again: "{" ".join(sys.argv)}"')
+                    QproInfoString, f'just run again: "{" ".join(sys.argv)}"' if user_lang != 'zh' else f'请重新运行: "{" ".join(sys.argv)}"')
                 exit(0)
         else:
             exit(-1)
