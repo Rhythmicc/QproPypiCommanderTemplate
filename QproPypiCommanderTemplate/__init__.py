@@ -9,61 +9,7 @@ if enable_config:
     config = QproPypiCommanderTemplateConfig()
 
 import sys
-from QuickProject import user_pip, _ask
-
-
-def external_exec(
-    cmd: str,
-    without_output: bool = False,
-    without_stdout: bool = False,
-    without_stderr: bool = False,
-):
-    """
-    外部执行命令
-
-    :param cmd: 命令
-    :param without_output: 是否不输出
-    :return: status code, output
-    """
-    # import threading
-    from subprocess import Popen, PIPE
-    from concurrent.futures import ThreadPoolExecutor, wait
-
-    class MixContent:
-        def __init__(self):
-            self.content = ""
-
-        def __add__(self, other):
-            self.content += other
-            return self
-
-        def __str__(self):
-            return self.content
-
-    content = MixContent()
-
-    def _output(pipe_name: str, process: Popen, content: MixContent):
-        ignore_status = (
-            without_stdout if pipe_name == "stdout" else without_stderr
-        ) or without_output
-        for line in iter(eval(f"process.{pipe_name}.readline"), ""):
-            if not ignore_status:
-                QproDefaultConsole.print(line.strip())
-            content += line
-
-    pool = ThreadPoolExecutor(2)
-    p = Popen(cmd, shell=True, stdout=PIPE, stderr=PIPE, bufsize=1, encoding="utf-8")
-
-    wait(
-        [
-            pool.submit(_output, "stdout", p, content),
-            pool.submit(_output, "stderr", p, content),
-        ]
-    )
-    pool.shutdown()
-    ret_code = p.wait()
-
-    return ret_code, str(content)
+from QuickProject import user_pip, _ask, external_exec
 
 
 def requirePackage(
