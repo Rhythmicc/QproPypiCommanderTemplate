@@ -1,7 +1,7 @@
 from QuickProject.Commander import Commander
 from . import *
 
-app = Commander()
+app = Commander(name)
 
 
 @app.command()
@@ -22,5 +22,5 @@ def main():
     app()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
